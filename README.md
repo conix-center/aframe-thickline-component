@@ -1,15 +1,11 @@
-## aframe-meshline-component
+## aframe-thickline-component
+
+Based on [aframe-meshline-component](https://github.com/andreasplesch/aframe-meshline-component), modified to use THREE.BufferGeometry (name change is due to previous ARENA naming).
 
 A component for thick lines in [A-Frame](https://aframe.io).
 
 The component is based on the A-frame component tutorial and [THREE.MeshLine](https://github.com/spite/THREE.MeshLine).
 
-Here is the adapted [smiley face example](https://raw.githack.com/andreasplesch/aframe-meshline-component/master/examples/basic/index.html).
-
-TODO:
-- README
-- test?
-- awesome?
 
 ### Properties
 
