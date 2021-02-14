@@ -1,4 +1,4 @@
-## aframe-thickline-component
+## arena-thickline-component
 
 Based on [aframe-meshline-component](https://github.com/andreasplesch/aframe-meshline-component), modified to use THREE.BufferGeometry (name change is due to previous ARENA naming).
 
