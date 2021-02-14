@@ -7,7 +7,7 @@ THREE.MeshLine = ml.MeshLine;
 THREE.MeshLineMaterial = ml.MeshLineMaterial;
 
 
-AFRAME.registerComponent('meshline', {
+AFRAME.registerComponent('thickline', {
   schema: {
     color: { default: '#000' },
     lineWidth: { default: 10 },
@@ -37,39 +37,17 @@ AFRAME.registerComponent('meshline', {
     var sceneEl = this.el.sceneEl;
     sceneEl.addEventListener( 'render-target-loaded', this.do_update.bind(this) );
     sceneEl.addEventListener( 'render-target-loaded', this.addlisteners.bind(this) );
-  
-    
-  /*
-    if (sceneEl.hasLoaded) {
-  
-      console.log('has loaded');
-      this.do_update(); //never happens ?
-  
-    } else {
-  
-      sceneEl.addEventListener('render-target-loaded', this.do_update.bind(this));
-  
-      }
-  */
   },
   
   addlisteners: function () {
-  
-    //var canvas = this.el.sceneEl.canvas;
-  
     // canvas does not fire resize events, need window
     window.addEventListener( 'resize', this.do_update.bind (this) );
-    
-    //console.log( canvas );
-    //this.do_update() ;
-  
   },
   
   do_update: function () {
   
     var canvas = this.el.sceneEl.canvas;
     this.resolution.set( canvas.width,  canvas.height );
-    //console.log( this.resolution );
     this.update();
 
   },
@@ -87,14 +65,14 @@ AFRAME.registerComponent('meshline', {
       far: this.data.far
     });
   
-    var geometry = new THREE.Geometry();
-    
+    var geometry = new THREE.BufferGeometry();
+    var positions = [];
     this.data.path.forEach(function (vec3) {
-      geometry.vertices.push(
-        new THREE.Vector3(vec3.x, vec3.y, vec3.z)
-      );
+        positions.push(vec3.x, vec3.y, vec3.z);
     });
-    
+
+    geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
+
     var widthFn = (
       typeof this.data.lineWidthStyler === 'string' &&
       this.data.lineWidthStyler.length > 0
